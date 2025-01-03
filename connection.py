@@ -2,10 +2,10 @@ import psycopg2
 
 def connection():
     # Configuring the connection
-    conexion = None
+    connection = None
     try:
         # Connecting to the PostgreSQL database
-        conexion = psycopg2.connect(
+        coconnectionbbe = psycopg2.connect(
             host="localhost",           # Address of the PostgreSQL server (localhost for local machine)
             database="postgres",        # Name of the database to connect to
             user="postgres",            # Database username
@@ -15,7 +15,7 @@ def connection():
         print("Successful connection")  # Successful connection message
         
         # Create a cursor to execute queries
-        cursor = conexion.cursor()
+        cursor = connection.cursor()
         
         # Execute an SQL query
         cursor.execute("SELECT version();")  # Query to get the PostgreSQL version
@@ -32,6 +32,8 @@ def connection():
         print("something went wrong with the connection:", e)
     finally:
         # Ensure the connection is closed even if there was an error
-        if conexion is not None:
-            conexion.close()
+        if connection is not None:
+            connection.close()
             print("Connection closed")  # Connection closed message
+    
+    return connection
