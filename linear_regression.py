@@ -16,7 +16,7 @@ df['year'] = df['year'].astype(int)
 print(df.dtypes)
 
 # Features and target variables
-X = df['month', 'year']
+X = df[['month', 'year']]
 y = df['quantity']
 
 # Split data into trainig and testing sets
