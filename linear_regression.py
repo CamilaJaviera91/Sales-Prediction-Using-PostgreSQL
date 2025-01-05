@@ -3,6 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from query import query
 import pandas as pd
+import matplotlib.pyplot as plt
 
 df = pd.DataFrame(query())
 
@@ -12,6 +13,9 @@ df.columns = ['month', 'year', 'product', 'quantity', 'total']
 # Transform month and year into a int type
 df['month'] = df['month'].astype(int)
 df['year'] = df['year'].astype(int)
+
+# Create a date column by combining 'year' and 'month
+df['date'] = pd.to_datetime(df[['year', 'month']].assign(day=1))
 
 print(df.dtypes)
 
