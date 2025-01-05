@@ -16,5 +16,3 @@ def connection():
     except OperationalError as e:
         print(f"Database connection failed {e}")
         return None
-    
-connection()
