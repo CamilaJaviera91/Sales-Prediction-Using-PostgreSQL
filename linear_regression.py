@@ -28,4 +28,4 @@ model.fit(X_train, y_train)
 
 # Predict and evaluate
 predictions = model.predict(X_test)
-print(f"Mean Squared Error: {mean_squared_error(y_test, predictions)}")
+print(f"Mean Squared Error: {round(mean_squared_error(y_test, predictions), 2)}")
