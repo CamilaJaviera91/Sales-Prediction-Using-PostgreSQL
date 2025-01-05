@@ -19,25 +19,24 @@ def query():
 
     # Execute the SQL query to retrieve the sales data grouped by year-month and product name
     cursor.execute('''
-                    SELECT 
-                        TO_CHAR(date, 'YYYY-MM') AS year_month,   -- Format the date to year-month
-                        product_name AS name,                      -- Product name
-                        SUM(s.quantity_sold) AS quantity,          -- Sum of quantities sold
-                        SUM(s.unit_value) AS value                 -- Sum of the unit values
-                    FROM sales AS s
-                    GROUP BY 
-                        TO_CHAR(date, 'YYYY-MM'), product_name    -- Grouping by year-month and product name
+                    select
+                        extract(month from s.date) as month, -- Format the date to month 
+                        extract(year from s.date) as year,   -- Format the date to year
+                        s.product_name as name,              -- Product name
+                        sum(s.quantity_sold) as quantity,    -- Sum of quantities sold
+                        sum(s.unit_value) as total           -- Sum of the unit values
+                    from sales as s
+                    group by                                 -- Grouping by month, year and product name
+                        extract(month from s.date),
+                        extract(year from s.date), 
+                        s.product_name    
                     ORDER BY 
-                        TO_CHAR(date, 'YYYY-MM');                 -- Order by the year-month column
+                        extract(month from s.date),
+                        extract(year from s.date);           -- Order by month and year column
                     ''')
 
     # Fetch all the results from the query
     records = cursor.fetchall()
-
-    # Print the records
-    print("Registros obtenidos de la consulta:")
-    for record in records:
-        print(record)
 
     # Close the connection after fetching the results
     cursor.close()  # Close the cursor
