@@ -45,6 +45,3 @@ def query():
 
     # Return the fetched records if needed
     return records
-
-# Call the query function
-query()
