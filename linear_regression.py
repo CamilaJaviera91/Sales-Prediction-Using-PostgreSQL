@@ -25,3 +25,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # Train the model
 model = LinearRegression()
 model.fit(X_train, y_train)
+
+# Predict and evaluate
+predictions = model.predict(X_test)
+print(f"Mean Squared Error: {mean_squared_error(y_test, predictions)}")
