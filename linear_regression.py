@@ -7,10 +7,16 @@ import pandas as pd
 df = pd.DataFrame(query())
 
 # Assign names to the columns
-df.columns = ['period', 'product', 'quantity', 'total']
+df.columns = ['month', 'year', 'product', 'quantity', 'total']
+
+# Transform month and year into a int type
+df['month'] = df['month'].astype(int)
+df['year'] = df['year'].astype(int)
+
+print(df.dtypes)
 
 # Features and target variables
-X = df['period']
+X = df['month', 'year']
 y = df['quantity']
 
 # Split data into trainig and testing sets
